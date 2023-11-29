@@ -1,0 +1,1 @@
+declare module 'pinyin-tone/v2';
