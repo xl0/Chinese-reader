@@ -1,8 +1,11 @@
 import type { PageServerLoad } from './$types';
-import * as fs from 'fs';
+import { readFileSync } from 'fs';
+import path from 'path';
 
 export const load = (async () => {
-    const simplified = JSON.parse(fs.readFileSync('simplified_dict.json', 'utf8'));
+
+    const file = path.join(process.cwd(), 'simplified_dict.json');
+    const simplified = JSON.parse(readFileSync(file, 'utf8'));
     
 	return { simplified};
 }) satisfies PageServerLoad;
