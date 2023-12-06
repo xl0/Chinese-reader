@@ -1,8 +1,8 @@
-import * as pt2 from 'pinyin-tone/v2';
+import Pinyin from "pinyin-tone";
 
 export function tone2accent(pinyin?: string) {
     console.log('tone2accent', pinyin);
-    return pinyin ? pt2(pinyin.toLowerCase().trim()) : '';
+    return pinyin ? Pinyin(pinyin.toLowerCase().trim()) : '';
 }
 
 export function tone2class(pinyn?: string) {

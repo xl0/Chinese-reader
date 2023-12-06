@@ -1,4 +1,4 @@
-declare module 'pinyin-tone/v2';
+// declare module 'pinyin-tone/v2';
 declare module 'hanzi';
 
 type Definition = {
