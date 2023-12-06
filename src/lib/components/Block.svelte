@@ -1,45 +1,77 @@
 <script lang="ts">
-	import * as pt2 from 'pinyin-tone/v2';
-	export let value: string = '';
-	export let metadata: Array<any>|undefined = undefined;
+	import HanziWriter from 'hanzi-writer';
 
-	function tone2accent(pinyn: string) {
-    console.log('tone2accent', pinyn);
-		return pt2(pinyn);
-	}
+	import HanziCard from './HanziCard.svelte';
+	import { tone2accent, tone2class } from '$lib/utils';
+	// import { dictionary } from '$lib/stores';
+	// import { tone2accent, tone2classb/utils';
 
-	function tone2class(pinyn: string) {
-		const tone = pinyn.slice(-1);
-		if (!isNaN(Number(tone))) {
-			return `tonecolor${tone}`;
-		}
-		return '';
-	}
+	// import { tone2class } from '$lib/tone2class';
+
+	export let word: Word;
+  // let dict: Record<string, DictEntry> = {};
+
+	console.log('word', word);
 </script>
 
-<div class="flex flex-col border rounded-sm min-w-fit group relative">
-	<div class="text-6xl">
-		{value}
-	</div>
-	{#if metadata}
-		<div
-			class="hidden group-hover:block absolute top-full min-w-fit bg-white p-2 rounded border m-2 shadow z-10"
-		>
-			{#each metadata as meta}
-				<!-- {@debug meta} -->
-				{@const pinyin = meta[0]}
-				{@const english = meta[1]}
+<div
+	class="flex flex-col rounded-sm group tooltip {word.hanzi[0].pinyin
+		? 'border border-black '
+		: ''}"
+	data-tip={word.english}
+>
+	<div class="flex flex-row items-center">
+		{#each word.hanzi as character}
+			<div class="flex flex-col items-center">
+				<!-- <a
+					class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}"
+					style={character.definitions?.length ? 'cursor: pointer;' : ''}
+					href="/hanzi/{character.hanzi}"
+          >
+          {character.hanzi}
+      </a> -->
 
-				<div>
-					{#if pinyin}
-						{#each pinyin.split(' ') as p}
-							<span class={tone2class(p)}>{tone2accent(p)}</span><span>&nbsp;</span>
-						{/each}
-					{/if}
-					<!-- <div class="text-xs whitespace-pre-wrap">{tone2accent(pinyin)}</div> -->
-					<div class="text-xs whitespace-nowrap">{english}</div>
-				</div>
-			{/each}
-		</div>
-	{/if}
+				<button class="dropdown">
+					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+					<div class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}" tabindex="0">
+						{character.hanzi}
+					</div>
+					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+					<!-- {#if dictionary[character.hanzi]} -->
+					<div
+						tabindex="0"
+						class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box card card-compact w-[20rem]"
+					>
+						<HanziCard {character} />
+						<!-- <div class="card-body w-full">
+							<div class="text-6xl w-full">{character.hanzi}</div>
+							{#if character.variants}
+								{#each character.variants as variant}
+									<div class="text-4xl ml-2">{tone2accent(variant.pinyin)}</div>
+									<div class="ml-2 whitespace-normal">{variant.english}</div>
+								{/each}
+							{/if}
+						</div> -->
+					</div>
+					<!-- {/if} -->
+				</button>
+				<div class="px-1 {tone2class(character.pinyin)}">{tone2accent(character.pinyin)}</div>
+			</div>
+		{/each}
+	</div>
 </div>
+
+<style>
+	.tone1 {
+		color: #c04747;
+	}
+	.tone2 {
+		color: #cfa422;
+	}
+	.tone3 {
+		color: #1a9418;
+	}
+	.tone4 {
+		color: #897ced;
+	}
+</style>
