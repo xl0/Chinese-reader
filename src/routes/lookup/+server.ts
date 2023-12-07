@@ -43,16 +43,20 @@ function populate_dictionary(item: string, dictionary: Record<string, DictEntry>
 		decomposition: decomponsition,
 		radical_definition: radical
 	};
-	for (let conponent of decomponsition.components1) {
-		console.log('conponent', conponent);
-		if (!dictionary[conponent]) {
-			dictionary = populate_dictionary(conponent, dictionary);
+	for (let component of decomponsition.components1) {
+		console.log('conponent', component);
+		if (component != "No glyph available" && !dictionary[component]) {
+			populate_dictionary(component, dictionary);
 		}
 	}
 
-	// for (let conponent in decomponsition.components2) {
-	// 	if (!dictionary[conponent]) populate_dictionary(conponent, dictionary);
-	// }
+    console.log('decomponsition.components2', decomponsition.components2);
+	for (let component of decomponsition.components2) {
+        console.log('conponent', component);
+        if (component != "No glyph available" && !dictionary[component]) {
+            populate_dictionary(component, dictionary);
+        }
+	}
 
 	return dictionary;
 }

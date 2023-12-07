@@ -9,7 +9,7 @@
 	// import { tone2class } from '$lib/tone2class';
 
 	export let word: Word;
-  // let dict: Record<string, DictEntry> = {};
+	// let dict: Record<string, DictEntry> = {};
 
 	console.log('word', word);
 </script>
@@ -37,23 +37,12 @@
 						{character.hanzi}
 					</div>
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-					<!-- {#if dictionary[character.hanzi]} -->
 					<div
 						tabindex="0"
-						class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box card card-compact w-[20rem]"
+						class="dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box border border-black min-w-[20rem]"
 					>
 						<HanziCard {character} />
-						<!-- <div class="card-body w-full">
-							<div class="text-6xl w-full">{character.hanzi}</div>
-							{#if character.variants}
-								{#each character.variants as variant}
-									<div class="text-4xl ml-2">{tone2accent(variant.pinyin)}</div>
-									<div class="ml-2 whitespace-normal">{variant.english}</div>
-								{/each}
-							{/if}
-						</div> -->
 					</div>
-					<!-- {/if} -->
 				</button>
 				<div class="px-1 {tone2class(character.pinyin)}">{tone2accent(character.pinyin)}</div>
 			</div>
