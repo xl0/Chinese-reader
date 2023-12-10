@@ -30,12 +30,13 @@
           >
           {character.hanzi}
       </a> -->
-
-				<button class="dropdown">
-					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-					<div class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}" tabindex="0">
-						{character.hanzi}
-					</div>
+      
+      <button class="dropdown">
+        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+        <div class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}" tabindex="0">
+          {character.hanzi}
+        </div>
+        <div class="px-1 {tone2class(character.pinyin)}">{tone2accent(character.pinyin)}</div>
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 					<div
 						tabindex="0"
@@ -44,7 +45,6 @@
 						<HanziCard {character} />
 					</div>
 				</button>
-				<div class="px-1 {tone2class(character.pinyin)}">{tone2accent(character.pinyin)}</div>
 			</div>
 		{/each}
 	</div>

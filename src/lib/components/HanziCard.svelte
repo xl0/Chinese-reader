@@ -59,12 +59,13 @@
 			console.log('writer', writer);
 		});
 
-		hanzi_strokes.addEventListener('click', () => {
+		card.addEventListener('click', () => {
 			writer.animateCharacter({});
 		});
 	});
 
 	let hanzi_strokes: HTMLElement;
+  let card: HTMLElement;
 	let component_container: HTMLElement;
 
 	function show_component(component: string) {
@@ -78,7 +79,7 @@
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 
-<div class="w-full flex flex-col">
+<div class="w-full flex flex-col" bind:this={card}>
 	<!-- <div class="text-6xl w-full">{character.hanzi}</div> -->
 	<div class="flex">
 		<div bind:this={hanzi_strokes}></div>
