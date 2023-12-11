@@ -3,14 +3,9 @@
 
 	import HanziCard from './HanziCard.svelte';
 	import { tone2accent, tone2class } from '$lib/utils';
-	// import { dictionary } from '$lib/stores';
-	// import { tone2accent, tone2classb/utils';
-
-	// import { tone2class } from '$lib/tone2class';
-
+	
 	export let word: Word;
-	// let dict: Record<string, DictEntry> = {};
-
+	
 	console.log('word', word);
 </script>
 
@@ -23,13 +18,6 @@
 	<div class="flex flex-row items-center">
 		{#each word.hanzi as character}
 			<div class="flex flex-col items-center">
-				<!-- <a
-					class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}"
-					style={character.definitions?.length ? 'cursor: pointer;' : ''}
-					href="/hanzi/{character.hanzi}"
-          >
-          {character.hanzi}
-      </a> -->
       
       <button class="dropdown">
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->

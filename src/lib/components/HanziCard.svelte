@@ -3,9 +3,7 @@
 
 	import { dictionary } from '$lib/stores';
 	import HanziWriter from 'hanzi-writer';
-	// import * as hanzi from 'hanzi'
-	// hanzi.start();
-
+	
 	import { onMount } from 'svelte';
 
 	export let character: Hanzi;
@@ -24,11 +22,10 @@
 			width: 100,
 			height: 100,
 			padding: 5,
-			strokeAnimationSpeed: 5, // 5x normal speed
-			delayBetweenStrokes: 500, // milliseconds
+			strokeAnimationSpeed: 4, // x times normal speed
+			delayBetweenStrokes: 400, // milliseconds
 			radicalColor: '#337ab7' // blue
 		});
-		// writer.animateCharacter({});
 
 		component_container.querySelectorAll('.component-item-hanzi').forEach((_element) => {
 			let element = _element as HTMLElement;
@@ -80,7 +77,6 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 
 <div class="w-full flex flex-col" bind:this={card}>
-	<!-- <div class="text-6xl w-full">{character.hanzi}</div> -->
 	<div class="flex">
 		<div bind:this={hanzi_strokes}></div>
 		<div class="flex gap-2" bind:this={component_container}>
@@ -91,44 +87,14 @@
 					{#each def.split('/') as definition}
 						<div class="component-item-definition">{definition}</div>
 					{/each}
-					<!-- <div class="grow-1">{$dictionary[component]?.radical_definition??""}</div> -->
 				</div>
 			{/each}
 		</div>
-
-		<!-- {#if $dictionary[character.hanzi].decomposition}
-			<div class="text-left items-end">
-				<div class="w-full">
-					{#each $dictionary[character.hanzi].decomposition.components1 as component}
-						<span>{show_component(component)}</span>
-					{/each}
-				</div>
-				<div class="w-full justify-start">
-					{#each $dictionary[character.hanzi].decomposition.components2 as component}
-						<span>{show_component(component)}</span>
-					{/each}
-				</div>
-			</div>
-		{/if} -->
 	</div>
-	<!-- {#if $dictionary[character.hanzi].decomposition2}
-    <div class="w-full" bind:this={decomposition2}></div>
-  {/if} -->
-	<!-- <div class="w-full"></div>
-	<div class="w-full"></div> -->
-
-	<!-- {#if $dictionary} -->
-	<!-- {@const dictionary_entry = $dictionary[character.hanzi]} -->
-	<!-- {@debug dictionary_entry} -->
 	{#if $dictionary[character.hanzi].definitions}
 		{#each $dictionary[character.hanzi].definitions as definition}
 			<div class="text-xl ml-2">{tone2accent(definition.pinyin)}</div>
 			<div class="ml-2 whitespace-normal">{definition.definition}</div>
 		{/each}
-		<!-- {#each character.definitions as variant}
-			<div class="text-xl ml-2">{tone2accent(variant.pinyin)}</div>
-			<div class="ml-2 whitespace-normal">{variant.english}</div>
-		{/each} -->
 	{/if}
-	<!-- {/if} -->
 </div>

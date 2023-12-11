@@ -30,16 +30,29 @@ if (!global.isHanziStarted) {
 
 function populate_dictionary(item: string, dictionary: Record<string, DictEntry>) {
     console.log('populate_dictionary', item);
-	const defitions = hanzi.definitionLookup(item);
-	console.log('defitions', defitions);
+	const definitions: Definition[] = hanzi.definitionLookup(item);
+	console.log('defitions', definitions);
 	const decomponsition = hanzi.decompose(item);
 	console.log('decomponse', decomponsition);
 	let radical = hanzi.getRadicalMeaning(item);
     radical = radical != "N/A" ? radical : undefined;
-    console.log('radical', radical);
+
+    if (!radical && definitions) {
+        radical = "";
+        for (let definition of definitions) {
+            let dd = definition.definition;
+            console.log(definition.definition)
+            if (!dd.includes("urname")) {
+                if (dd.includes("/")) dd=dd.split("/")[0];
+                if (dd.length < 10) radical += ("[" + dd + "] ");
+            }
+            
+        }
+        radical = radical?.trim();
+    }
 
 	dictionary[item] = {
-		definitions: defitions,
+		definitions: definitions,
 		decomposition: decomponsition,
 		radical_definition: radical
 	};
