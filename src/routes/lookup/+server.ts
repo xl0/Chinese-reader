@@ -28,47 +28,58 @@ if (!global.isHanziStarted) {
 // 	// return;
 // }) satisfies PageServerLoad;
 
-function populate_dictionary(item: string, dictionary: Record<string, DictEntry>) {
-    console.log('populate_dictionary', item);
+async function populate_dictionary(item: string, dictionary: Record<string, DictEntry>) {
+	console.log('populate_dictionary', item);
 	const definitions: Definition[] = hanzi.definitionLookup(item);
 	console.log('defitions', definitions);
 	const decomponsition = hanzi.decompose(item);
-	console.log('decomponse', decomponsition);
-	let radical = hanzi.getRadicalMeaning(item);
-    radical = radical != "N/A" ? radical : undefined;
 
-    if (!radical && definitions) {
-        radical = "";
-        for (let definition of definitions) {
-            let dd = definition.definition;
-            console.log(definition.definition)
-            if (!dd.includes("urname")) {
-                if (dd.includes("/")) dd=dd.split("/")[0];
-                if (dd.length < 10) radical += ("[" + dd + "] ");
-            }
-            
-        }
-        radical = radical?.trim();
-    }
+	// const strokes = await import(`hanzi-writer-data/${item}`) as any as {default: any};
+	// const strokes = await import(`hanzi-writer-data/${item}`, { assert: { type: 'json' } })
+
+	let strokes = null;
+	try {
+		strokes = await import(`/node_modules/hanzi-writer-data/${item}`);
+	} catch (e) {}
+
+
+	console.log('decomponse', decomponsition);
+
+	let radical = hanzi.getRadicalMeaning(item);
+	radical = radical != 'N/A' ? radical : undefined;
+
+	if (!radical && definitions) {
+		radical = '';
+		for (let definition of definitions) {
+			let dd = definition.definition;
+			console.log(definition.definition);
+			if (!dd.includes('urname')) {
+				if (dd.includes('/')) dd = dd.split('/')[0];
+				if (dd.length < 10) radical += '[' + dd + '] ';
+			}
+		}
+		radical = radical?.trim();
+	}
 
 	dictionary[item] = {
 		definitions: definitions,
 		decomposition: decomponsition,
-		radical_definition: radical
+		radical_definition: radical,
+        strokes: strokes
 	};
 	for (let component of decomponsition.components1) {
 		console.log('conponent', component);
-		if (component != "No glyph available" && !dictionary[component]) {
+		if (component != 'No glyph available' && !dictionary[component]) {
 			populate_dictionary(component, dictionary);
 		}
 	}
 
-    console.log('decomponsition.components2', decomponsition.components2);
+	console.log('decomponsition.components2', decomponsition.components2);
 	for (let component of decomponsition.components2) {
-        console.log('conponent', component);
-        if (component != "No glyph available" && !dictionary[component]) {
-            populate_dictionary(component, dictionary);
-        }
+		console.log('conponent', component);
+		if (component != 'No glyph available' && !dictionary[component]) {
+			populate_dictionary(component, dictionary);
+		}
 	}
 
 	return dictionary;
@@ -83,7 +94,8 @@ export const POST: RequestHandler = async ({ request }) => {
 	let dictionary: Record<string, DictEntry> = {};
 
 	for (let item of items) {
-		populate_dictionary(item, dictionary);
+		await populate_dictionary(item, dictionary);
+
 		// const defitions = hanzi.definitionLookup(item);
 		// console.log('defitions', defitions);
 		// const decomponsition  = hanzi.decompose(item);
@@ -115,5 +127,5 @@ export const POST: RequestHandler = async ({ request }) => {
 	// word.definitions = defitions;
 	// }
 
-	return new Response(JSON.stringify({ dictionary }));
+	return new Response(JSON.stringify(dictionary));
 };

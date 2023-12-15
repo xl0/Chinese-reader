@@ -36,6 +36,7 @@
   "dependencies": {
     "hanzi": "^2.1.5",
     "hanzi-writer": "^3.6.0",
+    "hanzi-writer-data": "^2.0.1",
     "pinyin-tone": "^2.2.0",
     "tailwind-merge": "^2.0.0"
   }

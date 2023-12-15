@@ -3,7 +3,7 @@
 
 	import { dictionary } from '$lib/stores';
 	import HanziWriter from 'hanzi-writer';
-	
+
 	import { onMount } from 'svelte';
 
 	export let character: Hanzi;
@@ -18,13 +18,18 @@
 	}
 
 	onMount(() => {
+		console.log('hanzi_strokes', dict_entry);
+
 		let writer = HanziWriter.create(hanzi_strokes, character.hanzi, {
 			width: 100,
 			height: 100,
 			padding: 5,
 			strokeAnimationSpeed: 4, // x times normal speed
 			delayBetweenStrokes: 400, // milliseconds
-			radicalColor: '#337ab7' // blue
+			radicalColor: '#337ab7', // blue
+			charDataLoader: function (char, onComplete) {
+				return $dictionary[char].strokes;
+			}
 		});
 
 		component_container.querySelectorAll('.component-item-hanzi').forEach((_element) => {
@@ -51,7 +56,10 @@
 					element.style.textAlign = 'center';
 					element.style.lineHeight = '40px';
 					console.log('err', err);
-				}
+				},
+        charDataLoader: function (char, onComplete) {
+          return $dictionary[char].strokes;
+        }
 			});
 			console.log('writer', writer);
 		});
@@ -62,7 +70,7 @@
 	});
 
 	let hanzi_strokes: HTMLElement;
-  let card: HTMLElement;
+	let card: HTMLElement;
 	let component_container: HTMLElement;
 
 	function show_component(component: string) {

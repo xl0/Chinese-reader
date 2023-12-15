@@ -61,7 +61,7 @@
 			let data = await response.json();
 
 			console.log('data', data);
-			$dictionary = { ...$dictionary, ...data.dictionary };
+			$dictionary = { ...$dictionary, ...data };
 		}
 
 		console.log('Dictionary updated:', $dictionary);
@@ -105,6 +105,5 @@
 		{/each}
 	</div>
 </div>
-
 
 <slot />

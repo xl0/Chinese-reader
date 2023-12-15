@@ -19,6 +19,7 @@ type DictEntry = {
 	definitions: Definition[];
 	decomposition: Deceomposition;
     radical_definition?: string;
+    strokes?: any;
 };
 
 type Hanzi = {
