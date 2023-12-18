@@ -3,9 +3,10 @@
 
 	import HanziCard from './HanziCard.svelte';
 	import { tone2accent, tone2class } from '$lib/utils';
-	
+
 	export let word: Word;
-	
+	export let show_pinyin: boolean;
+
 	console.log('word', word);
 </script>
 
@@ -18,13 +19,18 @@
 	<div class="flex flex-row items-center">
 		{#each word.hanzi as character}
 			<div class="flex flex-col items-center">
-      
-      <button class="dropdown">
-        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-        <div class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}" tabindex="0">
-          {character.hanzi}
-        </div>
-        <div class="px-1 {tone2class(character.pinyin)}">{tone2accent(character.pinyin)}</div>
+				<button class="dropdown">
+					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+					<div class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}" tabindex="0">
+						{character.hanzi}
+					</div>
+
+					{#if show_pinyin}
+						<div class="px-1 {tone2class(character.pinyin)}">{tone2accent(character.pinyin)}</div>
+					{:else}
+						<div class="px-1 invisible">{tone2accent(character.pinyin)}</div>
+					{/if}
+
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 					<div
 						tabindex="0"

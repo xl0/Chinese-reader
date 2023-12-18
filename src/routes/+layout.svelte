@@ -5,8 +5,7 @@
 	import TextArea from '$lib/components/TextArea.svelte';
 	import { onMount } from 'svelte';
 
-	import { original_text, chinese_text, annotated_chinese, dictionary} from '$lib/stores';
-
+	import { original_text, chinese_text, annotated_chinese, dictionary } from '$lib/stores';
 
 	function annotation_to_words(annotation: string) {
 		// A dictionary maps a hanzi to a list of definitions.
@@ -41,7 +40,6 @@
 				hanzi_set.add(one_hanzi);
 			}
 			words.push(word);
-
 		}
 		return { words, all_hanzi: Array.from(hanzi_set) };
 	}
@@ -65,11 +63,12 @@
 		}
 
 		console.log('Dictionary updated:', $dictionary);
-    console.log(Object.keys($dictionary))
+		console.log(Object.keys($dictionary));
 
-
-    return words;
+		return words;
 	}
+
+  let show_pinyin = false;
 
 	$: {
 		let { words, all_hanzi } = annotation_to_words($annotated_chinese);
@@ -77,7 +76,6 @@
 			annotated_chiniese_words = words;
 		});
 	}
-
 </script>
 
 <div class="flex flex-col gap-4 my-4">
@@ -90,18 +88,22 @@
 		<button class="btn btn-primary">Annotate</button>
 	</div>
 
-	<div class="w-2/3 self-center">
+	<div class="w-2/3 self-center flex gap-2 items-end">
 		<details class="collapse bg-base-200">
 			<summary class="collapse-title text-xl font-medium">Raw annotated Chinese</summary>
 			<div class="collapse-content">
 				<TextArea class="w-full" bind:value={$annotated_chinese} />
 			</div>
 		</details>
+		<div class="grow-1 w-xl min-w-max">
+			<input type="checkbox" id="show-pinyin" bind:checked={show_pinyin} />
+			<label for="show-pinyin" class="whitespace-nowrap">show pinyin</label>
+		</div>
 	</div>
 
 	<div class="flex flex-wrap gap-1 mx-10 w-5/6">
 		{#each annotated_chiniese_words as word}
-			<Block {word} />
+			<Block {word} {show_pinyin}/>
 		{/each}
 	</div>
 </div>
