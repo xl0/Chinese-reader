@@ -1,20 +1,6 @@
 import type { RequestHandler } from './$types';
 
-import * as hanzi from 'hanzi';
 import { get_components, get_definition, get_radical_meaning } from '$lib/utils.server';
-
-declare global {
-	interface NodeJS {
-		Global: {
-			isHanziStarted: boolean;
-		};
-	}
-}
-
-if (!global.isHanziStarted) {
-	hanzi.start();
-	global.isHanziStarted = true;
-}
 
 // import {populate_dictionary} from '$lib/utils';
 

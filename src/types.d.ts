@@ -19,7 +19,7 @@ type DictEntry = {
     // Many characters have more that one pinyin/definition pair.
 	definitions: Definition[];
 	// decomposition: Deceomposition;
-    components?: string;
+    components?: string[];
     radical_definition?: string;
     // strokes?: any;
 };
