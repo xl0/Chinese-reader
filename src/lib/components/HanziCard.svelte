@@ -129,8 +129,8 @@
 
 <div class="min-w-full flex flex-col" bind:this={card}>
 	<div class="flex">
-		<div bind:this={hanzi_strokes}></div>
-		<div class="flex gap-2" bind:this={component_container}>
+		<div bind:this={hanzi_strokes} style="cursor: pointer;"></div>
+		<div class="flex gap-2" bind:this={component_container} >
 
 		</div>
 	</div>
