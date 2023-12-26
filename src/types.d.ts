@@ -2,8 +2,8 @@
 declare module 'hanzi';
 
 type Definition = {
-	traditional: string; // The hanzi of the character.
-	simplified: string; // The simplified hanzi of the character.
+	// traditional: string; // The hanzi of the character.
+	// simplified: string; // The simplified hanzi of the character.
 	pinyin: string; // The pinyin of the character.
 	definition: string; // The english translation of the character.
 };
@@ -16,10 +16,12 @@ type Deceomposition = {
 };
 
 type DictEntry = {
+    // Many characters have more that one pinyin/definition pair.
 	definitions: Definition[];
-	decomposition: Deceomposition;
+	// decomposition: Deceomposition;
+    components?: string;
     radical_definition?: string;
-    strokes?: any;
+    // strokes?: any;
 };
 
 type Hanzi = {

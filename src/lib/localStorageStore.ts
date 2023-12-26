@@ -2,8 +2,10 @@ import { onDestroy } from 'svelte';
 import { writable } from 'svelte/store';
 
 
-// Based
+
 export const createLocalStorageStore = <T>(key: string, initialValue: T) => {
+    if (typeof window === 'undefined') return writable<T>(initialValue);
+
 	const store = writable<T>();
     console.log({item: localStorage.getItem(key)})
 

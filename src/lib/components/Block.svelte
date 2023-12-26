@@ -1,17 +1,17 @@
 <script lang="ts">
 	import HanziWriter from 'hanzi-writer';
 
-	import HanziCard from './HanziCard.svelte';
+
 	import { tone2accent, tone2class } from '$lib/utils';
 
 	export let word: Word;
 	export let show_pinyin: boolean;
-
-	console.log('word', word);
+	export let story_id: string;
+	// console.log('word', word);
 </script>
 
 <div
-	class="flex flex-col rounded-sm group tooltip {word.hanzi[0].pinyin
+	class="flex flex-col h-fit rounded-sm group tooltip {word.hanzi[0].pinyin
 		? 'border border-black '
 		: ''}"
 	data-tip={word.english}
@@ -21,9 +21,13 @@
 			<div class="flex flex-col items-center">
 				<button class="dropdown">
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-					<div class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}" tabindex="0">
+					<a
+						class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}"
+						tabindex="0"
+						href="/stories/{story_id}/{character.hanzi}"
+					>
 						{character.hanzi}
-					</div>
+					</a>
 
 					{#if show_pinyin}
 						<div class="px-1 {tone2class(character.pinyin)}">{tone2accent(character.pinyin)}</div>
@@ -32,12 +36,12 @@
 					{/if}
 
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-					<div
+					<!-- <div
 						tabindex="0"
 						class="dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box border border-black min-w-[20rem]"
 					>
 						<HanziCard {character} />
-					</div>
+					</div> -->
 				</button>
 			</div>
 		{/each}
