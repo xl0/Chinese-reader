@@ -31,8 +31,8 @@
 		</div>
 
 	</div>
-	<div class="flex gap-2 items-stretch grow border">
-		<div class="flex flex-wrap gap-1 w-2/3" bind:this={left_panel}>
+	<div class="flex gap-2 border grow items-start">
+		<div class="flex flex-wrap gap-1 w-2/3 items-end" bind:this={left_panel}>
 			{#if data.words}
 				{#each data.words as word}
 					<Block {word} {show_pinyin} {story_id} highlight={$page.params.hanzi} />

@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class="flex flex-col h-fit rounded-sm group tooltip {word.hanzi[0].pinyin
+	class="flex flex-col rounded-sm tooltip {word.hanzi[0].pinyin
 		? 'border border-black '
 		: ''}"
 	data-tip={word.english}
