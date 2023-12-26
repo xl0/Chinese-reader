@@ -43,7 +43,7 @@
 		<div class="flex flex-wrap gap-1 mx-10 w-2/3" bind:this={left_panel}>
 			{#if data.words}
 				{#each data.words as word}
-					<Block {word} {show_pinyin} {story_id} />
+					<Block {word} {show_pinyin} {story_id} highlight={$page.params.hanzi} />
 				{/each}
 			{/if}
 		</div>

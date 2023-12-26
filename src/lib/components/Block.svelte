@@ -7,6 +7,7 @@
 	export let word: Word;
 	export let show_pinyin: boolean;
 	export let story_id: string;
+  export let highlight: string;
 </script>
 
 <div
@@ -22,6 +23,7 @@
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 					<a
 						class="text-4xl px-1 whitespace-nowrap {tone2class(character.pinyin)}"
+            class:bold={highlight === character.hanzi}
 						tabindex="0"
 						href="/stories/{story_id}/{character.hanzi}"
 					>
@@ -53,4 +55,8 @@
 	.tone4 {
 		color: #897ced;
 	}
+  .bold {
+    font-weight: bold;
+  }
+
 </style>
