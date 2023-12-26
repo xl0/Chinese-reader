@@ -15,7 +15,7 @@
 	let story_id = $page.params.story;
 </script>
 
-<div class="flex flex-col gap-4 h-screen m-10">
+<div class="flex flex-col gap-4 h-screen p-10">
 	<div class="flex gap-4 items-baseline">
 		<h1 class="text-2xl font-bold">{data.title_cn} ({data.title})</h1>
 		<a class="underline" href="/">Go back</a>
@@ -31,8 +31,8 @@
 		</div>
 
 	</div>
-	<div class="flex gap-2 border grow items-start">
-		<div class="flex flex-wrap gap-1 w-2/3 items-end" bind:this={left_panel}>
+	<div class="flex gap-2  grow items-start">
+		<div class="flex flex-wrap gap-1 w-3/4 items-end" bind:this={left_panel}>
 			{#if data.words}
 				{#each data.words as word}
 					<Block {word} {show_pinyin} {story_id} highlight={$page.params.hanzi} />
@@ -40,7 +40,7 @@
 			{/if}
 		</div>
 
-		<div class="border w-1/3" bind:this={right_panel}>
+		<div class="border h-full w-1/4" bind:this={right_panel}>
 			<slot />
 		</div>
 	</div>
