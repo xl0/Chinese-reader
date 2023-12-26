@@ -12,7 +12,6 @@
 	let hanzi_strokes: HTMLElement;
 	let card: HTMLElement;
 	let component_container: HTMLElement;
-	let components_container: HTMLElement;
 
 	async function get_strokes(char: string) {
 		if (char in $strokes) return $strokes[char];
@@ -27,7 +26,6 @@
 		let components = $dictionary[hanzi]?.components;
 
 		if (!hanzi_strokes) return;
-		// console.log('hanzi_strokes', dict_entry);
 		console.log('components', components);
 		console.log('dictionary', $dictionary);
 
@@ -48,16 +46,6 @@
 					onError();
 				}
 				return res;
-				// const res = await fetch('/strokes/', {
-				// 	method: 'POST',
-				// 	body: JSON.stringify(char)
-				// });
-				// const res_json = await res.json();
-				// onComplete(res_json);
-				// return res_json;
-
-				// return await (await fetch('/strokes/' + char)).json();
-				// return dictionary[char].strokes;
 			}
 		});
 
@@ -113,21 +101,9 @@
         }
 					
 
-				//   .then((res) => {
-				// 		res.json().then((res) => {
-				// 			console.log('res', res);
-				// 			if (res) onComplete(res);
-				// 		});
-				// 	}).catch((err) => {
-				//     console.log('err', err);
-				//   });
-				// }
 			});
 
-			// if (!component) return;
-			// if (component == 'No glyph available') {
-			// 	return;
-			// }
+
 		}
 
 		hanzi_strokes.addEventListener('click', () => {
@@ -146,13 +122,7 @@
 		assign_strokes();
 	}
 
-	// function show_component(component: string) {
-	// 	let res = '';
-	// 	if (dictionary[component]?.radical_definition) {
-	// 		res += ` (${dictionary[component]?.radical_definition})`;
-	// 	}
-	// 	return res;
-	// }
+
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -161,15 +131,7 @@
 	<div class="flex">
 		<div bind:this={hanzi_strokes}></div>
 		<div class="flex gap-2" bind:this={component_container}>
-			<!-- {#each components as component}
-				{@const def = dictionary[component]?.radical_definition ?? ''}
-				<div class="items-center flex flex-col h-full" bind:this={components_container}>
-					<div class="component-item-hanzi">??</div>
-					{#each def.split('/') as definition}
-						<div class="component-item-definition">{definition}</div>
-					{/each}
-				</div>
-			{/each} -->
+
 		</div>
 	</div>
 	{#if $dictionary[hanzi]?.definitions}

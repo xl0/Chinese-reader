@@ -3,9 +3,6 @@
 	import Block from '$lib/components/Block.svelte';
 	import TextArea from '$lib/components/TextArea.svelte';
 	import type { PageData } from './$types';
-	import { dictionary, strokes } from '$lib/stores';
-
-	// import { original_text, chinese_text, annotated_chinese } from '$lib/stores';
 
 	export let data: PageData;
 
@@ -17,32 +14,6 @@
 
 	let story_id = $page.params.story;
 
-	// $: populate_strokes(all_hanzi_plus_components);
-
-	// let isDragging = false;
-	// let startX: number;
-	// let startWidth: number;
-
-	// function startDrag(event) {
-	//   console.log('startDrag');
-	//   isDragging = true;
-	//   startX = event.clientX;
-	//   startWidth = left_panel.offsetWidth;
-	// }
-
-	// function doDrag(event) {
-	//   console.log('doDrag');
-	//   if (!isDragging) return;
-	//   let newWidth = startWidth + event.clientX - startX;
-	//   left_panel.style.width = `${newWidth}px`;
-	// }
-
-	// function stopDrag() {
-	//   console.log('stopDrag');
-	//   isDragging = false;
-	// }
-	// window.addEventListener('mousemove', doDrag);
-	// window.addEventListener('mouseup', stopDrag);
 </script>
 
 <div class="flex flex-col gap-4 h-screen">
@@ -59,7 +30,7 @@
 		<details class="collapse bg-base-200">
 			<summary class="collapse-title text-xl font-medium">Raw annotated Chinese</summary>
 			<div class="collapse-content">
-				<!-- <TextArea class="w-full" bind:value={data.annotated_story} /> -->
+				<TextArea class="w-full" value={data.annotation.join('\n')} />
 			</div>
 		</details>
 		<div class="grow-1 w-xl min-w-max">
@@ -76,8 +47,6 @@
 				{/each}
 			{/if}
 		</div>
-
-		<!-- <div class="resize-x border-l-2 cursor-col-resize w-3" on:mousedown={startDrag}></div> -->
 
 		<div class="border w-1/3" bind:this={right_panel}>
 			<slot />

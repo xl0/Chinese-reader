@@ -6,10 +6,4 @@
 	// export let data: PageData;
 </script>
 
-
-<!-- {#if p.hanzi} -->
 <HanziCard hanzi={$page.params.hanzi} />
-<!-- {:else}
-	sdfsd -->
-<!-- <HanziCard hanzi={data.hanzi} /> -->
-<!-- {/if} -->

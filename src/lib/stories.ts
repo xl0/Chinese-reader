@@ -172,7 +172,6 @@ export const stories = [
 		"story_orig": "Once upon a time, there was a little bug. This bug was very persistent. He loved to write. One day, he met a big bug. The big bug said, \"I can write too!\" The little bug and the big bug became friends. They wrote together all the time. One day, they wrote a long story. They were very happy. But they did not know something unexpected was coming. The next day, they found their story was gone! They looked and looked, but could not find it. Then, they saw a tiny ant. The ant said, \"I took your story. I wanted to read it. It was very good!\" The little bug and the big bug were happy their story was liked. They let the ant keep it and they wrote a new story together.",
 		"story_cn": "从前，有一只小虫子。这只小虫子非常坚持不懒。它喜欢写作。一天，它遇到了一只大虫子。大虫子说：“我也会写作！”小虫子和大虫子成了朋友。他们一直一起写作。一天，他们写了一个长故事。他们非常高兴。但是他们不知道，有意想不到的事情即将发生。第二天，他们发现他们的故事不见了！他们找啊找，但是找不到。然后，他们看到了一只小蚂蚁。蚂蚁说：“是我拿走了你们的故事。我想读它。它写得很好！”小虫子和大虫子很高兴他们的故事受到了喜欢。他们让蚂蚁保留了故事，并且他们一起写了一个新故事。",
 		"story_annotation":[
-            "狼",
             "从前/cong2 qian2/Once upon a time",
             "，",
             "有/you3/have",

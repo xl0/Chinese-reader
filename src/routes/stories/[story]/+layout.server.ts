@@ -63,12 +63,5 @@ export function load({ params }) {
 
 	console.log('story res: ', JSON.stringify(res, null, 2));
 
-	return {
-		annotation: story.story_annotation,
-		components: all_components,
-		orig: story.story_orig,
-		cn: story.story_cn,
-		title: story.title_orig,
-		title_cn: story.title_cn
-    };
+	return res;
 } 

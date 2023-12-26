@@ -7,7 +7,6 @@
 	export let word: Word;
 	export let show_pinyin: boolean;
 	export let story_id: string;
-	// console.log('word', word);
 </script>
 
 <div
@@ -35,13 +34,6 @@
 						<div class="px-1 invisible">{tone2accent(character.pinyin)}</div>
 					{/if}
 
-					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-					<!-- <div
-						tabindex="0"
-						class="dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box border border-black min-w-[20rem]"
-					>
-						<HanziCard {character} />
-					</div> -->
 				</button>
 			</div>
 		{/each}

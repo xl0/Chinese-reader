@@ -6,7 +6,8 @@ export const POST: RequestHandler = async ({ request, setHeaders }) => {
 
 	for (const hanzi of hanziList) {
 		try {
-			strokes[hanzi] = (await import(`/node_modules/hanzi-writer-data/${hanzi}`)).default;
+            // XXX Is there a better way to do this?
+			strokes[hanzi] = (await import(`./../../../node_modules/hanzi-writer-data/${hanzi}.json`)).default;
 		} catch (e) {
 			console.log(`Failed to get strokes for ${hanzi}`);
             strokes[hanzi] = null;
